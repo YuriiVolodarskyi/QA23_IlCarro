@@ -29,8 +29,6 @@ public class LoginTests extends TestBase {
 
     }
 
-
-
     @Test
     public void loginSuccess() {
         app.getHelperUser().openLoginForm();
@@ -39,9 +37,10 @@ public class LoginTests extends TestBase {
 
         //Assert
         //Assert.assertTrue(app.getHelperUser().isLogged());
-        Assert.assertEquals(app.getHelperUser().getMessage(),"Logged in success");
+        Assert.assertEquals(app.getHelperUser().getMessage(), "Logged in success");
 
     }
+
     @Test
     public void loginSuccessModel() {
         app.getHelperUser().openLoginForm();
@@ -49,11 +48,30 @@ public class LoginTests extends TestBase {
         app.getHelperUser().submitLogin();
 
         //Assert
-        Assert.assertEquals(app.getHelperUser().getMessage(),"Logged in success");
+        Assert.assertEquals(app.getHelperUser().getMessage(), "Logged in success");
         //Assert.assertTrue(app.getHelperUser().isLogged());
     }
+
+    @Test
+    public void loginWrongEmail() {
+        app.getHelperUser().openLoginForm();
+        app.getHelperUser().fillLoginForm("mych65@gmail.com", "Yv030665!");
+        app.getHelperUser().submitLogin();
+
+        Assert.assertEquals(app.getHelperUser().getMessage(), "\"Login or Password incorrect\"");
+    }
+
+    @Test
+    public void loginWrongPassword(){
+        app.getHelperUser().openLoginForm();
+        app.getHelperUser().fillLoginForm("alimych65@gmail.com", "030665!");
+        app.getHelperUser().submitLogin();
+
+        Assert.assertEquals(app.getHelperUser().getMessage(), "\"Login or Password incorrect\"");
+    }
+
     @AfterMethod
-    public void postCondition(){
+    public void postCondition() {
         app.getHelperUser().clickOkButton();
     }
 }

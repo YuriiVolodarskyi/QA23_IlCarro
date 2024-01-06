@@ -4,11 +4,13 @@ import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HelperUser extends HelperBase{
+public class HelperUser extends HelperBase {
     WebDriver wd;
+
     public HelperUser(WebDriver wd) {
         super(wd);
     }
+
     public void openLoginForm() {
         click(By.xpath("//a[text()=' Log in ']"));
     }
@@ -28,11 +30,10 @@ public class HelperUser extends HelperBase{
     }
 
     public void submitLogin() {
-        //click(By.xpath("//button[text()='Y’alla!']")); DOESN'T WORK! SYMBOL ’ CHANGED FOR вЂ™
         click(By.cssSelector("[type='submit']"));
     }
 
-    public void clickOkButton(){
+    public void clickOkButton() {
         click(By.xpath("//button[text() = 'Ok']"));
 
     }
