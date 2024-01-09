@@ -74,7 +74,7 @@ public class HelperUser extends HelperBase {
     }
 
     public void checkPolicy() {
-        //click(By.id("terms-of-use"));/0x0
+        //click(By.id("checkbox-label terms-label"));/0x0
         // click(By.cssSelector("label[for='terms-of-use']"));
 
         //variant 2
