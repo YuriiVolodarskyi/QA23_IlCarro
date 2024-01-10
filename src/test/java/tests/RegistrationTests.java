@@ -22,10 +22,10 @@ public class RegistrationTests extends TestBase{
         System.out.println(System.currentTimeMillis());
         int z = (int)System.currentTimeMillis()/ 1000%3600;
         User user = new User()
-                .withFirstName("Lora")
-                .withLastName("Snow")
-                .withEmail("snow" + z + "@gmail.com")
-                .withPassword("Ssnow12345$");
+                .withFirstName("Yurii")
+                .withLastName("Volodarskyi")
+                .withEmail("volodar" + z + "@gmail.com")
+                .withPassword("Volodar12345$");
         app.getHelperUser().openRegistrationForm();
         app.getHelperUser().fillRegistrationForm(user);
         app.getHelperUser().checkPolicy();

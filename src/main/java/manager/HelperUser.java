@@ -7,8 +7,7 @@ import org.openqa.selenium.*;
 //import org.openqa.selenium.WebElement;
 
 public class HelperUser extends HelperBase {
-    WebDriver wd;
-
+   
     public HelperUser(WebDriver wd) {
         super(wd);
     }
