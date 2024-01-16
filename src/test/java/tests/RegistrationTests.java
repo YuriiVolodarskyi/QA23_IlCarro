@@ -49,7 +49,7 @@ public class RegistrationTests extends TestBase{
         app.getHelperUser().submit();
 
         Assert.assertTrue(app.getHelperUser().isElementPresent(By.xpath("//div[text() = ' Name is required ']")));
-        app.getHelperUser().click(By.className("logo"));
+        //app.getHelperUser().click(By.className("logo"));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class RegistrationTests extends TestBase{
         app.getHelperUser().submit();
 
         Assert.assertTrue(app.getHelperUser().isElementPresent(By.xpath("//div[text() = ' Last name is required ']")));
-        app.getHelperUser().click(By.className("logo"));
+        //app.getHelperUser().click(By.className("logo"));
     }
 
     @Test
@@ -81,6 +81,9 @@ public class RegistrationTests extends TestBase{
         app.getHelperUser().submit();
 
         Assert.assertTrue(app.getHelperUser().isElementPresent(By.xpath("//div[text() = 'Wrong email format']")));
+        Assert.assertTrue(app.getHelperUser().getErrorText().contains("Wrong email format"));
+        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
+
     }
 
     @Test
@@ -88,7 +91,7 @@ public class RegistrationTests extends TestBase{
         User user = new User()
                 .withFirstName("Yurii")
                 .withLastName("Volodarskyi")
-                .withEmail("alimych65gmail.com")
+                .withEmail("alimych65@gmail.com")
                 .withPassword("12345$");
         app.getHelperUser().openRegistrationForm();
         app.getHelperUser().fillRegistrationForm(user);
@@ -97,6 +100,8 @@ public class RegistrationTests extends TestBase{
 
         Assert.assertTrue(app.getHelperUser().isElementPresent
                 (By.xpath("//div[contains(text(), 'Password must contain')]")));
+        Assert.assertTrue(app.getHelperUser().getErrorText().contains("Password must contain minimum 8 symbols"));
+        Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
     }
 
 
