@@ -18,6 +18,7 @@ public class AddNewCarTests extends TestBase {
 
     @Test
     public void addNewCarSuccess() {
+        logger.info("Test data valid");
         int i = new Random().nextInt(1000) + 1000;
         Car car = Car.builder()
                 .location("Tel-Aviv, Israel")
@@ -37,13 +38,17 @@ public class AddNewCarTests extends TestBase {
         app.getHelperCar().submit();
 
         Assert.assertTrue(app.getHelperCar().getMessage().contains("added successful"));
+        logger.info("Assert checks is message with text 'added successful' present");
         Assert.assertEquals(app.getHelperCar().getMessage(),
                 car.getManufacture() + " " + car.getModel() + " added successful");
+        logger.info("Assert checks is car with entered manufacture and model added");
+
 
     }
 
     @Test
     public void addNewCarSuccessAll() {
+        logger.info("Test data valid - all fields");
         int i = new Random().nextInt(1000) + 1000;
         Car car = Car.builder()
                 .location("Tel-Aviv, Israel")
@@ -62,8 +67,10 @@ public class AddNewCarTests extends TestBase {
         app.getHelperCar().submit();
 
         Assert.assertTrue(app.getHelperCar().getMessage().contains("added successful"));
+        logger.info("Assert checks is message with text 'added successful' present");
         Assert.assertEquals(app.getHelperCar().getMessage(),
                 car.getManufacture() + " " + car.getModel() + " added successful");
+        logger.info("Assert checks is car with entered manufacture and model added");
 
     }
     @AfterMethod
