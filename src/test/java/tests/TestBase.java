@@ -3,28 +3,48 @@ package tests;
 import manager.ApplicationManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.lang.reflect.Method;
 
-public class TestBase{
+public class TestBase {
     Logger logger = LoggerFactory.getLogger(TestBase.class);
     static ApplicationManager app = new ApplicationManager();
 
     @BeforeMethod
-    public void startLogger(Method m){
+    public void startLogger(Method m) {
         logger.info("Start test --> " + m.getName());
     }
+/*
+    @BeforeMethod
+    public void setApp() {
+        app.init();
+    }
+*/
 
     @BeforeSuite
-    public void setApp(){
+    public void setApp() {
         app.init();
     }
 
+
     @AfterSuite
-    public void tearDown(){
-        //app.stop();
+    public void tearDown() {
+        app.stop();
     }
+
+    /*
+    @AfterMethod
+    public void tearDown() {
+        app.stop();
+    }
+*/
+    @AfterMethod
+    public void end() {
+        logger.info("==============================================");
+    }
+
 }

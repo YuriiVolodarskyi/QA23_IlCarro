@@ -43,8 +43,6 @@ public class LoginTests extends TestBase {
         //Assert.assertTrue(app.getHelperUser().isLogged());
         Assert.assertEquals(app.getHelperUser().getMessage(), "Logged in success");
         logger.info("Assert checks is message 'Logged in success' present");
-
-
     }
 
     @Test
@@ -97,7 +95,6 @@ public class LoginTests extends TestBase {
 
         Assert.assertEquals(app.getHelperUser().getMessage(), "\"Login or Password incorrect\"");
         logger.info("Assert checks is message '\"Login or Password incorrect\"' present");
-
     }
 
     @AfterMethod
