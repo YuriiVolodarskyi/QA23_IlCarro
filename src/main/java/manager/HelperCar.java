@@ -3,6 +3,7 @@ package manager;
 import models.Car;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.LocalDate;
@@ -55,7 +56,9 @@ public class HelperCar extends HelperBase {
     }
 
     public void searchCurrentMonth(String city, String dataFrom, String dataTo) {
+        clearTextBox(By.id("city"));
         typeCity(city);
+        clearTextBox(By.id("dates"));
         click(By.id("dates"));
         //"Tel-Aviv, Israel", "1/27/2024", "1/30/2024"
 
@@ -78,7 +81,9 @@ public class HelperCar extends HelperBase {
     }
 
     public void searchCurrentYear(String city, String dataFrom, String dataTo) {
+        clearTextBox(By.id("city"));
         typeCity(city);
+        clearTextBox(By.id("dates"));
         click(By.id("dates"));
 
         LocalDate now = LocalDate.now();
@@ -96,7 +101,9 @@ public class HelperCar extends HelperBase {
         diffMonth = to.getMonthValue() - from.getMonthValue();
         if (diffMonth > 0)
             clickNextMonthButton(diffMonth);
-        click(By.xpath("//div[text()=' " + to.getDayOfMonth() + " ']"));
+        //click(By.xpath("//div[text()=' " + to.getDayOfMonth() + " ']"));
+        String locator = String.format("//div[text()=' %s ']", to.getDayOfMonth());
+        click(By.xpath(locator));
     }
 
     private void clickNextMonthButton(int diffMonth) {
@@ -107,7 +114,9 @@ public class HelperCar extends HelperBase {
     }
 
     public void searchAnyPeriod(String city, String dataFrom, String dataTo) {
-         typeCity(city);
+        clearTextBox(By.id("city"));
+        typeCity(city);
+        clearTextBox(By.id("dates"));
         //click(By.id("dates"));
         //clearNew(wd.findElement(By.id("dates")));
         //pause(500);
@@ -126,13 +135,6 @@ public class HelperCar extends HelperBase {
 
         if (from.getYear() - year > 0) {
             setDayThisYear(from);
-          /*
-            click(By.cssSelector("button[aria-label='Choose month and year']"));
-            click(By.xpath("//div[text()=' " + from.getYear() + " ']"));
-            click(By.xpath("//div[text()=' " + from.getMonth().toString().substring(0, 3) + " ']"));
-            click(By.xpath("//div[text()=' " + from.getDayOfMonth() + " ']"));
-
-           */
             if (diffMonthToFrom > 0)
                 clickNextMonthButton(diffMonth);
             click(By.xpath("//div[text()=' " + to.getDayOfMonth() + " ']"));
@@ -141,15 +143,8 @@ public class HelperCar extends HelperBase {
                 if (diffMonth > 0)
                     clickNextMonthButton(diffMonth);
                 click(By.xpath("//div[text()=' " + from.getDayOfMonth() + " ']"));
-
                 setDayThisYear(to);
-                /*
-                click(By.cssSelector("button[aria-label='Choose month and year']"));
-                click(By.xpath("//div[text()=' " + to.getYear() + " ']"));
-                click(By.xpath("//div[text()=' " + to.getMonth().toString().substring(0, 3) + " ']"));
-                click(By.xpath("//div[text()=' " + to.getDayOfMonth() + " ']"));
 
-                 */
             } else {
                 if (diffMonth > 0)
                     clickNextMonthButton(diffMonth);
@@ -171,6 +166,23 @@ public class HelperCar extends HelperBase {
     }
 
 
+    public void navigateByLogo() {
+        click(By.cssSelector("a.logo"));
+    }
+
+    public void searchWrongPeriod(String city, String dataFrom, String dataTo) {
+        clearTextBox(By.id("city"));
+        typeCity(city);
+        clearTextBox(By.id("dates"));
+
+        LocalDate from = LocalDate.parse(dataFrom, DateTimeFormatter.ofPattern("M/d/yyyy"));
+        LocalDate to = LocalDate.parse(dataTo, DateTimeFormatter.ofPattern("M/d/yyyy"));
+
+        type(By.id("dates"), from + " - " + to);
+        click(By.className("cdk-overlay-container"));
+
+
+    }
 }
 
 

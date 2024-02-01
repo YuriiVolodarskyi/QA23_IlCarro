@@ -1,5 +1,6 @@
 package tests;
 
+import manager.DataProviderUser;
 import models.User;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -32,11 +33,11 @@ public class LoginTests extends TestBase {
 
     }
 
-    @Test
-    public void loginSuccess() {
-        logger.info("Test data email: 'alimych65@gmail.com' and password: 'Yv030665!'");
+    @Test(dataProvider = "loginSuccess", dataProviderClass = DataProviderUser.class)
+    public void loginSuccess(String email, String password) {
+        logger.info("Test data email: " + email + " and password: " + password);
         app.getHelperUser().openLoginForm();
-        app.getHelperUser().fillLoginForm("alimych65@gmail.com", "Yv030665!");
+        app.getHelperUser().fillLoginForm(email, password);
         app.getHelperUser().submit();
 
         //Assert
@@ -45,11 +46,11 @@ public class LoginTests extends TestBase {
         logger.info("Assert checks is message 'Logged in success' present");
     }
 
-    @Test
-    public void loginSuccessModel() {
-        logger.info("Test data email: 'alimych65@gmail.com' and password: 'Yv030665!'");
+    @Test(dataProvider = "loginModelSuccess", dataProviderClass = DataProviderUser.class)
+    public void loginSuccessModel(String email, String password) {
+        logger.info("Test data email " + email + " and password " + password);
         app.getHelperUser().openLoginForm();
-        app.getHelperUser().fillLoginForm("alimych65@gmail.com", "Yv030665!");
+        app.getHelperUser().fillLoginForm(email, password);
         app.getHelperUser().submit();
 
         //Assert
@@ -59,11 +60,11 @@ public class LoginTests extends TestBase {
         //Assert.assertTrue(app.getHelperUser().isLogged());
     }
 
-    @Test
-    public void loginWrongEmail() {
-        logger.info("Test data wrong email: 'mych65@gmail.com' and password: 'Yv030665!'");
+    @Test(dataProvider = "loginWrongEmail", dataProviderClass = DataProviderUser.class)
+    public void loginWrongEmail(String email, String password) {
+        logger.info("Test data email " + email + " and password " + password);
         app.getHelperUser().openLoginForm();
-        app.getHelperUser().fillLoginForm("mych65gmail.com", "Yv030665!");
+        app.getHelperUser().fillLoginForm(email, password);
         app.getHelperUser().submit();
 
         //Assert.assertEquals(app.getHelperUser().getMessage(), "\"Login or Password incorrect\"");
@@ -74,11 +75,11 @@ public class LoginTests extends TestBase {
         //Assert.assertTrue(app.getHelperUser().isYallaButtonNotActive());
     }
 
-    @Test
-    public void loginWrongPassword(){
-        logger.info("Test data email: 'alimych65@gmail.com' and wrong password: '030665!'");
+    @Test(dataProvider = "loginWrongPassword", dataProviderClass = DataProviderUser.class)
+    public void loginWrongPassword(String email, String password){
+        logger.info("Test data email " + email + " and password " + password);
         app.getHelperUser().openLoginForm();
-        app.getHelperUser().fillLoginForm("alimych65@gmail.com", "030665!");
+        app.getHelperUser().fillLoginForm(email, password);
         app.getHelperUser().submit();
 
         Assert.assertEquals(app.getHelperUser().getMessage(), "\"Login or Password incorrect\"");
@@ -86,11 +87,11 @@ public class LoginTests extends TestBase {
 
     }
 
-    @Test
-    public void loginUnregisteredUser(){
-        logger.info("Test data email that doesn't exist: 'imych65@gmail.com' and password: '030665!'");
+    @Test(dataProvider = "loginUnregisteredUser", dataProviderClass = DataProviderUser.class)
+    public void loginUnregisteredUser(String email, String password){
+        logger.info("Test data email " + email + " and password " + password);
         app.getHelperUser().openLoginForm();
-        app.getHelperUser().fillLoginForm("imych65@gmail.com", "030665!");
+        app.getHelperUser().fillLoginForm(email, password);
         app.getHelperUser().submit();
 
         Assert.assertEquals(app.getHelperUser().getMessage(), "\"Login or Password incorrect\"");
