@@ -59,7 +59,8 @@ public class SearchCarTests extends TestBase {
         app.getHelperCar().getScreen("src/test/screenshots/Wrong1.png");
         app.getHelperCar().submit();
         Assert.assertTrue(app.getHelperCar().isElementPresent(By.className("ng-star-inserted")));
-        //Assert.assertTrue(app.getHelperCar().isElementPresent(By.xpath("//div[text() = ' You can't pick date before today ']")));
+        Assert.assertTrue(app.getHelperCar().isElementPresent(By.xpath("//div[contains(text(),'pick date before today')]")));
+        //Assert.assertTrue(app.getHelperCar().isElementPresent(By.xpath("//div[text() = ' You can\'t pick date before today ')]")));
     }
 
 
