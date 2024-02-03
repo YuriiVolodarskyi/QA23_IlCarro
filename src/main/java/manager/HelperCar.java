@@ -175,12 +175,15 @@ public class HelperCar extends HelperBase {
         typeCity(city);
         clearTextBox(By.id("dates"));
 
-        LocalDate from = LocalDate.parse(dataFrom, DateTimeFormatter.ofPattern("M/d/yyyy"));
-        LocalDate to = LocalDate.parse(dataTo, DateTimeFormatter.ofPattern("M/d/yyyy"));
-
-        type(By.id("dates"), from + " - " + to);
+        type(By.id("dates"), dataFrom + " - " + dataTo);
         click(By.className("cdk-overlay-container"));
 
+
+    }
+
+    public boolean isErrorDisplayed(String message) {
+        String text = wd.findElement(By.className("ng-star-inserted")).getText();
+        return text.equals(message);
 
     }
 }

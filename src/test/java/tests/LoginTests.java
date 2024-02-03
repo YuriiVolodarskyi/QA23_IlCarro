@@ -46,6 +46,19 @@ public class LoginTests extends TestBase {
         logger.info("Assert checks is message 'Logged in success' present");
     }
 
+    @Test(dataProvider = "loginFile", dataProviderClass = DataProviderUser.class)
+    public void loginSuccessDPFile(User user) {
+        logger.info("Test data: " + user.toString());
+        app.getHelperUser().openLoginForm();
+        app.getHelperUser().fillLoginForm(user);
+        app.getHelperUser().submit();
+
+        //Assert
+        //Assert.assertTrue(app.getHelperUser().isLogged());
+        Assert.assertEquals(app.getHelperUser().getMessage(), "Logged in success");
+        logger.info("Assert checks is message 'Logged in success' present");
+    }
+
     @Test(dataProvider = "loginModelSuccess", dataProviderClass = DataProviderUser.class)
     public void loginSuccessModel(String email, String password) {
         logger.info("Test data email " + email + " and password " + password);

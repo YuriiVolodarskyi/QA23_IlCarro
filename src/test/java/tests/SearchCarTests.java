@@ -1,9 +1,8 @@
 package tests;
 
-import manager.DataProviderCar;
+import manager.DataProviderSearchCar;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -29,7 +28,7 @@ public class SearchCarTests extends TestBase {
  */
     @Test
     public void searchCurrentMonthSuccess() {
-        app.getHelperCar().searchCurrentMonth("Tel-Aviv, Israel", "1/30/2024", "1/31/2024");
+        app.getHelperCar().searchCurrentMonth("Tel-Aviv, Israel", "2/8/2024", "2/22/2024");
         app.getHelperCar().getScreen("src/test/screenshots/currentMonth.png");
         app.getHelperCar().submit();
         Assert.assertTrue(app.getHelperCar().isListOfCarAppeared());
@@ -43,7 +42,7 @@ public class SearchCarTests extends TestBase {
         Assert.assertTrue(app.getHelperCar().isListOfCarAppeared());
     }
 
-    @Test(dataProvider = "searchAnyPeriodSuccess", dataProviderClass = DataProviderCar.class)
+    @Test(dataProvider = "searchAnyPeriodSuccess", dataProviderClass = DataProviderSearchCar.class)
     public void searchAnyPeriodSuccess(String city, String dataFrom, String dataTo) {
         logger.info("Test data city: " + city + " data from: " + dataFrom + "data to: " + dataTo);
         app.getHelperCar().searchAnyPeriod(city, dataFrom, dataTo);
@@ -52,15 +51,26 @@ public class SearchCarTests extends TestBase {
         Assert.assertTrue(app.getHelperCar().isListOfCarAppeared());
     }
 
-    @Test(dataProvider = "searchWrongPeriod", dataProviderClass = DataProviderCar.class)
+    @Test(dataProvider = "searchAnyPeriodSuccessFile", dataProviderClass = DataProviderSearchCar.class)
+    public void searchAnyPeriodSuccessDPFile(String city, String dataFrom, String dataTo) {
+        logger.info("Test data city: " + city + " data from: " + dataFrom + "data to: " + dataTo);
+        app.getHelperCar().searchAnyPeriod(city, dataFrom, dataTo);
+        app.getHelperCar().getScreen("src/test/screenshots/Any1.png");
+        app.getHelperCar().submit();
+        Assert.assertTrue(app.getHelperCar().isListOfCarAppeared());
+    }
+
+    @Test(dataProvider = "searchWrongPeriod", dataProviderClass = DataProviderSearchCar.class)
     public void searchWrongPeriod(String city, String dataFrom, String dataTo) {
         logger.info("Test data city: " + city + " data from: " + dataFrom + "data to: " + dataTo);
         app.getHelperCar().searchWrongPeriod(city, dataFrom, dataTo);
         app.getHelperCar().getScreen("src/test/screenshots/Wrong1.png");
         app.getHelperCar().submit();
+        Assert.assertTrue(app.getHelperCar().isYallaButtonNotActive());
+        Assert.assertTrue(app.getHelperCar().isErrorDisplayed("You can't pick date before today"));
         Assert.assertTrue(app.getHelperCar().isElementPresent(By.className("ng-star-inserted")));
         Assert.assertTrue(app.getHelperCar().isElementPresent(By.xpath("//div[contains(text(),'pick date before today')]")));
-        //Assert.assertTrue(app.getHelperCar().isElementPresent(By.xpath("//div[text() = ' You can\'t pick date before today ')]")));
+
     }
 
 
