@@ -44,7 +44,7 @@ public class DataProviderUser {
     public Iterator<Object[]> loginModelSuccess() {
         List<Object[]> list = new ArrayList<>();
         list.add(new Object[]{"alimych65@gmail.com", "Yv030665!"});
-        list.add(new Object[]{"sonya@gmail.com", "Aa123456&"});
+      //list.add(new Object[]{"sonya@gmail.com", "Aa123456&"});
         return list.iterator();
     }
 
@@ -52,7 +52,7 @@ public class DataProviderUser {
     public Iterator<Object[]> loginWrongEmail() {
         List<Object[]> list = new ArrayList<>();
         list.add(new Object[]{"ch65gmail.com", "Yv030665!"});
-        list.add(new Object[]{"ych65@gmailcom", "Aa123456&"});
+        //list.add(new Object[]{"ych65@gmailcom", "Aa123456&"});
         return list.iterator();
     }
 

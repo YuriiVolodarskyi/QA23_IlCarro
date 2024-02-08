@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class LoginTests extends TestBase {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void preCondition() {
         if (app.getHelperUser().isLogged()) {
             app.getHelperUser().logout();
@@ -111,7 +111,7 @@ public class LoginTests extends TestBase {
         logger.info("Assert checks is message '\"Login or Password incorrect\"' present");
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void postCondition() {
         app.getHelperUser().clickOkButton();
     }

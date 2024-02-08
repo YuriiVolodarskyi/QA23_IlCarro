@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import java.util.Random;
 
 public class AddNewCarTests extends TestBase {
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void preCondition() {
         if (!app.getHelperUser().isLogged())
             app.getHelperUser().login(new User().withEmail("alimych65@gmail.com").withPassword("Yv030665!"));
@@ -73,7 +73,7 @@ public class AddNewCarTests extends TestBase {
         logger.info("Assert checks is car with entered manufacture and model added");
 
     }
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void postCondition(){
         app.getHelperCar().returnToHome();
     }
